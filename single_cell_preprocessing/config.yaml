@@ -5,7 +5,7 @@ input_path:
 output_path: 
 reference: refdata-gex-GRCh38-2020-A
 study_list:
-  sample_study:
+  BICCN_subset4:
   - 10X318-1_S01
   - 10X318-2_S01
   - 10X318-3_S01
