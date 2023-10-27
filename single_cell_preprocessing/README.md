@@ -10,7 +10,8 @@
     GRCh38-2020-A   ``curl -O https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2020-A.tar.gz``
 
 본 파이프라인은 [snakemake](https://snakemake.readthedocs.io/en/stable/)를 이용하여 구축함.
-- Snakefile
-  워크플로우 파일. Cell Ranger 
-- config.yaml
+- Snakefile  
+  워크플로우 파일.  
+- config.yaml  
+  설정파일.
   
