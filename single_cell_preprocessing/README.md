@@ -14,4 +14,6 @@
   워크플로우 파일.  
 - config.yaml  
   설정파일.
+- run_snakemake.sh
+  snakemake 실행 스크립트
   
