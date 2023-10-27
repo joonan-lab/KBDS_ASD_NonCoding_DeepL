@@ -1,0 +1,27 @@
+cellranger:
+  localmem: 64
+  threads: 7
+input_path: 
+output_path: 
+reference: refdata-gex-GRCh38-2020-A
+study_list:
+  sample_study:
+  - 10X318-1_S01
+  - 10X318-2_S01
+  - 10X318-3_S01
+  - 10X318-4_S01
+  - 10X318-5_S01
+  - 10X318-6_S01
+  - 10X318-7_S01
+  - 10X318-8_S01
+  - 10X319-1_S01
+  - 10X319-2_S01
+  - 10X319-3_S01
+  - 10X319-4_S01
+  - 10X319-5_S01
+  - 10X319-6_S01
+  - 10X319-7_S01
+  - 10X319-8_S01
+  - 10X329-1_S01
+  - 10X329-2_S01
+

@@ -1,0 +1,44 @@
+configfile: "config.yaml"
+
+indir = config['input_path']
+outdir = config['output_path']
+study_list = list(config['study_list'].keys())
+study_sample_tuple = [(study, sample_id) for study in study_list for sample_id in config['study_list'][study]]
+
+rule all:
+    input:
+        expand(outdir+"/{study_name}/cram/{sample_name}.cram", zip, study_name=[t[0] for t in study_sample_tuple], sample_name=[t[1] for t in study_sample_tuple])
+
+rule cellranger_count:
+    input:
+        indir+"/{study_name}/fastq/{sample_name}"
+    params:
+        reference = config["reference"],
+        threads = config["cellranger"]["threads"],
+        mem = config['cellranger']['localmem'],
+        cellranger_dir = outdir+"/{study_name}/cellranger"
+    output:
+        directory(outdir+"/{study_name}/cellranger/{sample_name}/outs") #"possorted_genome_bam.bam" 
+    log:
+        outdir+"/{study_name}/log/{sample_name}_cellranger_processing.log"
+    shell: """
+        cd {params.cellranger_dir}
+
+        cellranger count --id {wildcards.sample_name} --transcriptome {params.reference} --fastqs {input} --localcores {params.threads} --localmem {params.mem} > {log}
+
+        touch {output}
+    """
+
+rule bam_to_cram:
+    input:
+        outdir+"/{study_name}/cellranger/{sample_name}/outs"
+        #bam_file = "possorted_genome_bam.bam"
+    params:
+        reference = config["reference"]+'/fasta/genome.fa'
+    output:
+        outdir+"/{study_name}/cram/{sample_name}.cram"
+    shell: """
+        samtools view -@ 7 -T {params.reference} -C -o {output} {input}/possorted_genome_bam.bam
+        
+        samtools index {output}
+    """
