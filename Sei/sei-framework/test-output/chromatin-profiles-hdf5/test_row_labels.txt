@@ -1,0 +1,3 @@
+chrom	pos	name	ref	alt	strand	ref_match	contains_unk
+chrX	79270181	.	G	A	+	True	False
+chr11	5248329	.	T	G	+	True	False
